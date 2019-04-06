@@ -1,8 +1,8 @@
 import scrapy
-from Hupu.items import HupuItem
+from Hupu.items import PlayerInfo
 from scrapy.selector import Selector
 import re
-class HupuSpider(scrapy.Spider):
+class PlayerSpider(scrapy.Spider):
     def __init__(self):
         self.cau = 0
     name = "playerspider"
@@ -10,15 +10,18 @@ class HupuSpider(scrapy.Spider):
     allowed_domains = ["nba.hupu.com"]
     # ???????url??
     start_urls = ['https://nba.hupu.com/players/rockets']
+    custom_settings = {
+    'ITEM_PIPELINES' : {'Hupu.pipelines.MongoPipeline':300}
+}
     cau = 0
     # ?????Item??
     def parse(self, response):
         print('**************************SPIDER**********START*************************************************')
         hxs = Selector(response)
-        players = hxs.xpath('/html/body/div[3]/div[5]/table/tbody/tr').extract()
+        players = hxs.xpath('/html/body/div[3]/div[4]/table/tbody/tr').extract()
         for player in players[1:]:
             # print(player)
-            item = HupuItem()
+            item = PlayerInfo()
             item['PName'] = ','.join(re.findall(".*.html\">(.*)</a></b>",player))#球员姓名
             INFO = re.findall(".*<td>(.*)</td>",player)
             # print(INFO)

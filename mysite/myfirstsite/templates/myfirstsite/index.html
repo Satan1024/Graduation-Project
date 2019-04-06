@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>NBA DATA ANALYSIS</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../../static/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="../../static/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<div style="position: absolute; left: 0px; top: 0px;">
+			<li><a href="#login">注册or登陆</a></li>
+		</div>
+
+
+		<a ahref="http://www.dylanj.cn/" style="z-index: 9999; position: fixed ! important; right: 0px; top: 0px;">
+			<canvas id="canvas" width="200" height="200"
+				style="position: absolute; width:260px; right: 0px; top: 0px;">clock</canvas>
+			<div style="text-align:center;clear:both">
+				<script type="text/javascript"></script>
+				<script type="text/javascript"></script>
+			</div>
+			<script src="../../static/js/clock.js"></script>
+		</a>
+		<!-- Header -->
+		<header id="header">
+			<div class="logo">
+				<span class="icon fa-diamond"></span>
+			</div>
+
+			<div class="content">
+
+				<div class="inner">
+					<h1>NBA数据分析平台</h1>
+					<p>A box for analyzing NBA data from a variety of strange angles</p>
+				</div>
+			</div>
+			<nav>
+				<ul>
+					<select name="" id="" onchange="window.location=this.value">
+						<option value="http://www.dylanj.cn/">球员&球队</option>
+						<option value="#playerinfo">球员信息</option>
+						<option value="#teaminfo">球队信息</option>
+						<option value="#news24">24小时新闻</option>
+
+					</select>
+					<li><a href="#work">ECharts</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+					<!--<li><a href="#elements">Elements</a></li>-->
+				</ul>
+			</nav>
+
+		</header>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- playerinfo -->
+			<article id="playerinfo">
+				<h2 class="major">PlayerInformation</h2>
+				<span class="image main"><img src="../../static/images/pic01.jpg" alt="" /></span>
+				<table>
+					<p>球队基本信息如下</p>
+					<tr>
+						<th>球员姓名</th>
+						<th>球衣号码</th>
+						<th>球员位置</th>
+						<th>身高</th>
+						<th>体重</th>
+						<th>生日</th>
+						<th>合同</th>
+						<th>本年薪资（/万美元）</th>
+						<th>所在球队</th>
+					</tr>
+					{% for playerinfo in PIF_list %}
+					<tr>
+						<th>{{playerinfo.PName}}</th>
+						<th>{{playerinfo.PNumber}}</th>
+						<th>{{playerinfo.PLocation}}</th>
+						<th>{{playerinfo.PHeight}}</th>
+						<th>{{playerinfo.PWeight}}</th>
+						<th>{{playerinfo.PBirth}}</th>
+						<th>{{playerinfo.PContract}}</th>
+						<th>{{playerinfo.PCurrent_salary}}</th>
+						<th>{{playerinfo.PTeam}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</article>
+			<article id="teaminfo">
+				<h2 class="major">TeamInformation</h2>
+				<span class="image main"><img src="../../static/images/pic01.jpg" alt="" /></span>
+				<table>
+					<p>球队基本信息如下</p>
+					<tr>
+						<th>球员名称</th>
+						<th>球队进入联盟时间</th>
+						<th>球员主场</th>
+						<th>球队网站主页</th>
+						<th>球队主教练</th>
+						<th>球队介绍</th>
+						<th>球队场均得分</th>
+						<th>球队场均助攻</th>
+						<th>球队场均篮板</th>
+						<th>球队场均失分</th>
+						<th>球队场均失误</th>
+
+					</tr>
+					{% for teaminfo in TIF_list %}
+					<tr>
+						<th>{{teaminfo.TName}}</th>
+						<th>{{teaminfo.TStartTime}}</th>
+						<th>{{teaminfo.THome}}</th>
+						<th>{{teaminfo.TURL}}</th>
+						<th>{{teaminfo.TCoach}}</th>
+						<th>{{teaminfo.TIntroduction}}</th>
+						<th>{{teaminfo.TAvgScore}}</th>
+						<th>{{teaminfo.TAvgPer}}</th>
+						<th>{{teaminfo.TAvgRebound}}</th>
+						<th>{{teaminfo.TAvgLosepoint}}</th>
+						<th>{{teaminfo.TAvgTurnover}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</article>
+			<article id="news24">
+				<h2 class="major">PlayerInformation</h2>
+				<span class="image main"><img src="../../static/images/pic01.jpg" alt="" /></span>
+				<table>
+					<p>24小时内最热如下</p>
+					<tr>
+						<th>NEWS标题</th>
+						<th>NEWS来源</th>
+						<th>NEWS时间</th>
+						<th>NEWS内容</th>
+
+					</tr>
+					{% for newinfo in NIF_list %}
+					<tr>
+						<th>{{newinfo.N24Title}}</th>
+						<th>{{newinfo.N24Source}}</th>
+						<th>{{newinfo.N24Time}}</th>
+						<th>{{newinfo.N24Text}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</article>
+
+
+			<!-- Work -->
+			<article id="work">
+				<script src="../../static/js/echarts.min.js"></script>
+				<div id="maintest" style="width: 600px;height:400px;"></div>
+				<script type="text/javascript">
+					// 基于准备好的dom，初始化echarts实例
+					var myChart = echarts.init(document.getElementById('maintest'));
+
+					// 指定图表的配置项和数据
+					var option = {
+						title: {
+							text: 'ECharts 入门示例'
+						},
+						tooltip: {},
+						legend: {
+							data: ['销量']
+						},
+						xAxis: {
+							data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+						},
+						yAxis: {},
+						series: [{
+							name: '销量',
+							type: 'bar',
+							data: [5, 20, 36, 10, 10, 20]
+						}]
+					};
+
+					// 使用刚指定的配置项和数据显示图表。
+					myChart.setOption(option);
+				</script>
+			</article>
+
+			<!-- About -->
+			<article id="about">
+				<h2 class="major">About</h2>
+				<span class="image main"><img src="../../static/images/pic03.jpg" alt="" /></span>
+				<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at
+					eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula
+					lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada
+					fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum
+					dolor sit amet.</p>
+			</article>
+
+			<!-- Contact -->
+			<article id="contact">
+				<h2 class="major">Contact</h2>
+				<form method="post" action="/contactINFO/">
+					{% csrf_token %}
+
+					<div class="fields">
+						<div class="field half">
+							<label for="name">Name</label>
+							<input type="text" name="name" id="name" />
+						</div>
+						<div class="field half">
+							<label for="email">Email</label>
+							<input type="text" name="email" id="email" />
+						</div>
+						<div class="field">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="4"></textarea>
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Send Message" class="primary" /></li>
+						<li><input type="reset" value="Reset" /></li>
+					</ul>
+				</form>
+				{% if messages %}
+				<script>
+					{% for msg in messages %}
+					alert('{{ msg.message }}');
+					{% endfor %}
+				</script>
+				{% endif %}
+
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+			</article>
+
+
+			<!-- 注册 -->
+			<article id="login">
+				<form class="form-horizontal" action="/login/" method="post" style="width:0rem,heigh:0rem">
+					{% csrf_token %}
+					<div >
+						<label>用户名</label>
+						<div >
+							<input  name="UserNM"  placeholder="UserName">
+						</div>
+					</div>
+					<div>
+						<label >密码</label>
+						<div class="col-sm-10">
+							<input type="password" name="UserPwd"  placeholder="Password">
+						</div>
+					</div>
+					<div>
+						<div>
+							<button type="submit" class="btn btn-default">注册</button>
+							<span style="color:red;"> {{ status }}</span>
+						</div>
+					</div>
+				</form>
+			</article>
+
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<p class="copyright">&copy; Web Designer: <a>D.H</a></p>
+		</footer>
+
+	</div>
+
+	<!-- BG -->
+	<div id="bg"></div>
+
+	<!-- Scripts -->
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../static/js/browser.min.js"></script>
+	<script src="../../static/js/breakpoints.min.js"></script>
+	<script src="../../static/js/util.js"></script>
+	<script src="../../static/js/main.js"></script>
+
+
+</body>
+
+</html>

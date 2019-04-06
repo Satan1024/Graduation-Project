@@ -90,14 +90,23 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-FEED_EXPORT_FIELDS = [
-    'PName',
-    'PNumber',
-    'PLocation',
-    'PHeight',
-    'PWeight',
-    'PBirth',
-    'PContract',
-    'PCurrent_salary',
-    'PTeam'
-]
+# FEED_EXPORT_FIELDS = [
+#     'PName',
+#     'PNumber',
+#     'PLocation',
+#     'PHeight',
+#     'PWeight',
+#     'PBirth',
+#     'PContract',
+#     'PCurrent_salary',
+#     'PTeam'
+# ]
+
+
+ITEM_PIPELINES = {
+    'Hupu.pipelines.MongoPipeline':300,
+    'Hupu.pipelines.MongoPipeline':400,
+}
+
+MONGO_URL = 'localhost'
+MONGO_DB = 'Hupu'

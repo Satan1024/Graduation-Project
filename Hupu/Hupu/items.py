@@ -8,7 +8,7 @@
 import scrapy
 
 
-class HupuItem(scrapy.Item):
+class PlayerInfo(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     PName = scrapy.Field()
@@ -21,3 +21,25 @@ class HupuItem(scrapy.Item):
     PCurrent_salary = scrapy.Field()
     PTeam = scrapy.Field()
     pass
+
+class TeamInfo(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    TName = scrapy.Field()
+    TStartTime= scrapy.Field()
+    THome = scrapy.Field()
+    TURL = scrapy.Field()
+    TCoach = scrapy.Field()
+    TIntroduction = scrapy.Field()
+    TAvgScore = scrapy.Field()
+    TAvgPer = scrapy.Field()
+    TAvgRebound= scrapy.Field()
+    TAvgLosepoint = scrapy.Field()
+    TAvgTurnover = scrapy.Field()
+    pass
+
+class News(scrapy.Item):
+    N24Title = scrapy.Field()
+    N24Source = scrapy.Field()
+    N24Time = scrapy.Field()
+    N24Text = scrapy.Field()
